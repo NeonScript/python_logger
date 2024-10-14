@@ -1,9 +1,15 @@
 {
   "version": 1,
   "disable_existing_loggers": false,
-  "filters": {},
   "formatters": {
-    "simple": { "format": "[%(asctime)s]:[%(levelname)s]:%(message)s" }
+    "simple": {
+      "format": "[%(levelname)s|%(module)s|L%(lineno)d] %(asctime)s: %(message)s",
+      "datefmt": "%Y-%m-%dT%H:%M:%S%z"
+    },
+    "detailed": {
+      "format": "[%(levelname)s|%(module)s|L%(lineno)d] %(asctime)s: %(message)s",
+      "datefmt": "%Y-%m-%dT%H:%M:%S%z"
+    }
   },
   "handlers": {
     "stderr": {
@@ -15,11 +21,16 @@
     "file": {
       "class": "logging.handlers.RotatingFileHandler",
       "level": "DEBUG",
-      "formatter": "simple",
-      "filename": "logs/logs.log",
-      "maxBytes": 20000000,
+      "formatter": "detailed",
+      "filename": "logs/app.log",
+      "maxBytes": 10000000,
       "backupCount": 3
     }
   },
-  "loggers": { "root": { "level": "DEBUG", "handlers": ["stderr", "file"] } }
+  "loggers": {
+    "root": {
+      "level": "DEBUG",
+      "handlers": ["file", "stderr"]
+    }
+  }
 }

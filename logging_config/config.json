@@ -12,6 +12,12 @@
     }
   },
   "handlers": {
+    "console": {
+      "class": "logging.StreamHandler",
+      "level": "DEBUG",
+      "formatter": "simple",
+      "stream": "ext://sys.stdout"
+    },
     "stderr": {
       "class": "logging.StreamHandler",
       "level": "WARNING",
@@ -25,12 +31,19 @@
       "filename": "logs/app.log",
       "maxBytes": 10000000,
       "backupCount": 3
+    },
+    "syslog": {
+      "class": "logging.handlers.SysLogHandler",
+      "level": "DEBUG",
+      "formatter": "detailed",
+      "address": "/dev/log",
+      "facility": 19
     }
   },
   "loggers": {
     "root": {
       "level": "DEBUG",
-      "handlers": ["file", "stderr"]
+      "handlers": ["console"]
     }
   }
 }
